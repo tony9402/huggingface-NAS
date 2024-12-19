@@ -1,0 +1,13 @@
+name: Python Build Test
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "setup.py"
+    branches:
+      - main
+
+jobs:
+  python-build-test:
+    uses: ./.github/workflows/python-build-test.yaml

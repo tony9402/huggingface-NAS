@@ -13,8 +13,6 @@ on:
 jobs:
   python-build-test:
     uses: ./.github/workflows/python-build-test.yaml
-    with:
-      ref: ${{ github.ref }}
   pypi-publish:
     name: upload release to PyPI
     runs-on: ubuntu-latest
