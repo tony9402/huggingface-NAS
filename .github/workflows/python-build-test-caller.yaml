@@ -1,8 +1,9 @@
-name: Python Build Test
+name: Python Build Test Caller
 
 on:
   push:
     paths:
+      - ".github/workflows/python-build-test-caller.yaml"
       - "src/**"
       - "setup.py"
     branches:
