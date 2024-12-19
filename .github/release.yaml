@@ -1,0 +1,56 @@
+name-template: 'v$RESOLVED_VERSION'
+tag-template: 'v$RESOLVED_VERSION'
+categories:
+  - title: '🚀 Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+    collapse-after: 16
+  - title: '🐛 Bug Fixes'
+    labels:
+      - 'fix'
+      - 'bugfix'
+      - 'bug'
+    collapse-after: 16
+  - title: '📃 Documents'
+    label: 
+      - 'doc'
+    collapse-after: 16
+change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
+change-title-escapes: '\<*_&' 
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch
+template: |
+  ## Changes (v$RESOLVED_VERSION)
+
+  $CHANGES
+autolabeler:
+  - label: 'doc'
+    files:
+      - '*.md'
+    branch:
+      - '/docs{0,1}\/.+/'
+    title:
+      - '/doc/i'
+  - label: 'bug'
+    branch:
+      - '/fix\/.+/'
+    title:
+      - '/fix/i'
+      - '/hotfix/i'
+      - '/bug/i'
+  - label: 'feature'
+    title:
+      - '/feat/i'
+    branch:
+      - '/feature\/.+/'
+      - '/feat\/.+/'

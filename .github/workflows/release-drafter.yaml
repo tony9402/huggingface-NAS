@@ -1,0 +1,35 @@
+name: Release Drafter
+
+on:
+  push:
+    paths:
+    - ".github/workflows/"
+    - "src/**"
+    - "README.md"
+    - "requirements.txt"
+    - "setup.py"
+    branches:
+    - main
+  pull_request_target:
+    types:
+    - opened
+    - reopened
+    - edited
+    - synchronize
+
+permissions:
+  contents: read
+
+jobs:
+  update_release_draft:
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: release-drafter/release-drafter@v5
+      with:
+        config-name: release.yaml
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
