@@ -26,7 +26,7 @@ setup(
     long_description_content_type="text/markdown",
     keywords="huggingface nas",
     license="Apache 2.0 License",
-    url="https://github.com/tony9402/huggingface_nas",
+    url="https://github.com/tony9402/huggingface-NAS",
     package_dir={"": "src"},
     packages=find_packages("src"),
     include_package_data=True,
