@@ -18,13 +18,13 @@ install_requires = [
 
 setup(
     name="huggingface_nas",
-    version="0.1.0",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
+    version="0.1.0.post0",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
     author="tony9402",
     author_email="tony9402@naver.com",
     description="Using NAS such as huggingface hub",
     long_description=open("README.md", "r", encoding="utf-8").read(),
     long_description_content_type="text/markdown",
-    keywords="huggingface nas",
+    keywords="huggingface nas synology",
     license="Apache 2.0 License",
     url="https://github.com/tony9402/huggingface-NAS",
     package_dir={"": "src"},
