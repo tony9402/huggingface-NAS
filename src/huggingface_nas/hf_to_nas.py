@@ -34,9 +34,9 @@ def upload_dataset(
     interactive_output: bool = True,
 ):
     local_dir = tmp_folder
-    os.makedir(tmp_folder, exist_ok=True)
-    os.makedir(cache_tmp_folder, exist_ok=True)
     if not os.path.exists(local_dir):
+        os.makedirs(tmp_folder, exist_ok=True)
+        os.makedirs(cache_tmp_folder, exist_ok=True)
         try:
             hf_data = load_dataset(
                 path=name,
@@ -114,6 +114,7 @@ def upload_model(
 ):
     local_dir = os.path.join(cache_tmp_folder, name)
     if not os.path.exists(local_dir):
+        os.makedirs(local_dir)
         try:
             Repository(local_dir=local_dir, clone_from=name)
         except Exception as e:

@@ -13,7 +13,7 @@ install_requires = [
 
 setup(
     name="huggingface_nas",
-    version="0.1.0.post2",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
+    version="0.1.0.post3",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
     author="tony9402",
     author_email="tony9402@naver.com",
     description="Using NAS such as huggingface hub",
