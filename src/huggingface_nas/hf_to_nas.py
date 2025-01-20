@@ -18,6 +18,7 @@ def upload_dataset(
     revision: Optional[Union[str, Version]] = None,
     tmp_folder: str = ".tmp_hf_to_nas",
     cache_tmp_folder: str = ".cache_hf_to_nas",
+    rename: Optional[str] = None,
     token: Optional[str] = None,
     num_proc: Optional[int] = None,
     *,
@@ -33,6 +34,8 @@ def upload_dataset(
     interactive_output: bool = True,
 ):
     local_dir = tmp_folder
+    os.makedir(tmp_folder, exist_ok=True)
+    os.makedir(cache_tmp_folder, exist_ok=True)
     if not os.path.exists(local_dir):
         try:
             hf_data = load_dataset(
@@ -63,7 +66,8 @@ def upload_dataset(
             interactive_output=interactive_output,
         )
         try:
-            remote_folder = os.path.join(base_folder, name)
+            dataset_name = rename if rename is not None else name
+            remote_folder = os.path.join(base_folder, dataset_name)
             res = fi.get_file_list(folder_path=remote_folder)
             if res["success"] and any(file["path"] for file in res["data"]["files"] if remote_folder in file["path"]):
                 raise Exception("이미 존재하는 파일입니다")
@@ -73,7 +77,7 @@ def upload_dataset(
         for root, dirs, files in os.walk(local_dir):
             for file_name in files:
                 file_path = os.path.join(root, file_name)
-                dest_path = os.path.join(base_folder, name, os.path.relpath(file_path, local_dir))
+                dest_path = os.path.join(base_folder, dataset_name, os.path.relpath(file_path, local_dir))
                 dest_path = os.path.split(dest_path)[0]
                 fi.upload_file(
                     dest_path=dest_path,
@@ -93,8 +97,9 @@ def upload_dataset(
 def upload_model(
     name,
     base_folder,
-    cache_tmp_folder=".cache_hf_to_nas",
-    token=None,
+    cache_tmp_folder = ".cache_hf_to_nas",
+    rename: Optional[str] = None,
+    token: Optional[str] = None,
     *,
     ip_address: Optional[str] = None,
     port: Optional[str] = None,
@@ -129,7 +134,8 @@ def upload_model(
             interactive_output=interactive_output,
         )
         try:
-            remote_folder = os.path.join(base_folder, name)
+            model_name = rename if rename is not None else name
+            remote_folder = os.path.join(base_folder, model_name)
             res = fi.get_file_list(folder_path=remote_folder)
             if res["success"] and any(file["path"] for file in res["data"]["files"] if remote_folder in file["path"]):
                 raise Exception("이미 존재하는 파일입니다")
