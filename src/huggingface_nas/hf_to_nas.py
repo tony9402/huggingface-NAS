@@ -1,8 +1,9 @@
 import os
 import shutil
-from typing import Optional
+from typing import Optional, Union
 
-from datasets import load_dataset
+from datasets import load_dataset, Split
+from datasets.utils.version import Version
 from huggingface_hub import Repository
 from synology_api.exceptions import FileStationError
 
@@ -12,9 +13,13 @@ from .webapi import WebAPI
 def upload_dataset(
     name,
     base_folder,
-    tmp_folder=".tmp_hf_to_nas",
-    cache_tmp_folder=".cache_hf_to_nas",
-    token=None,
+    subset: Optional[str] = None,
+    split: Optional[Union[str, Split]] = None,
+    revision: Optional[Union[str, Version]] = None,
+    tmp_folder: str = ".tmp_hf_to_nas",
+    cache_tmp_folder: str = ".cache_hf_to_nas",
+    token: Optional[str] = None,
+    num_proc: Optional[int] = None,
     *,
     ip_address: Optional[str] = None,
     port: Optional[str] = None,
@@ -30,7 +35,14 @@ def upload_dataset(
     local_dir = tmp_folder
     if not os.path.exists(local_dir):
         try:
-            hf_data = load_dataset(name, token=token, cache_dir=cache_tmp_folder)
+            hf_data = load_dataset(
+                path=name,
+                name=subset,
+                split=split,
+                revision=revision,
+                token=token, 
+                cache_dir=cache_tmp_folder
+            )
             hf_data.save_to_disk(local_dir)
         except Exception as e:
             shutil.rmtree(cache_tmp_folder)

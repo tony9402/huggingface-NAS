@@ -4,11 +4,6 @@ from pathlib import Path
 from setuptools import find_packages, setup
 
 
-stale_egg_info = Path(__file__).parent / "huggingface_nas.egg-info"
-if stale_egg_info.exists():
-    shutil.rmtree(stale_egg_info)
-
-
 install_requires = [
     "tqdm>=4.27",
     "datasets>=3.1.0",
@@ -18,7 +13,7 @@ install_requires = [
 
 setup(
     name="huggingface_nas",
-    version="0.1.0.post0",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
+    version="0.1.0.post1",  # expected format is one of x.y.z.dev0, or x.y.z.rc1 or x.y.z (no to dashes, yes to dots)
     author="tony9402",
     author_email="tony9402@naver.com",
     description="Using NAS such as huggingface hub",
