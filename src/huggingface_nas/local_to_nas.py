@@ -61,7 +61,6 @@ def upload_local_model(
                     continue
                 dest_path = os.path.join(base_path, target_folder, os.path.relpath(file_path, local_dir))
                 dest_path = os.path.split(dest_path)[0]
-                print(file_path, dest_path)
                 fi.upload_file(
                     dest_path=dest_path,
                     file_path=file_path,
