@@ -16,6 +16,26 @@ limitations under the License.
 
 # Huggingface NAS
 
+<!-- repository-guide:start -->
+## 저장소 안내
+
+Hugging Face 모델·데이터셋과 로컬 모델 파일을 Synology NAS에 업로드하고, NAS에 저장된 자료를 다시 불러오는 Python 패키지입니다.
+
+| 경로 | 내용 |
+| --- | --- |
+| [src/huggingface_nas/hf_to_nas.py](src/huggingface_nas/hf_to_nas.py) | Hugging Face 모델·데이터셋 업로드 |
+| [src/huggingface_nas/local_to_nas.py](src/huggingface_nas/local_to_nas.py) | 로컬 모델 업로드 |
+| [src/huggingface_nas/load.py](src/huggingface_nas/load.py) | NAS 모델·데이터셋 다운로드 |
+| [src/huggingface_nas/webapi.py](src/huggingface_nas/webapi.py) | NAS Web API 연동 |
+| [setup.py](setup.py) | 패키지 버전, Python 요구 사항과 의존성 |
+| [LICENSE](LICENSE) | Apache 2.0 라이선스 |
+
+이 저장소의 코드를 로컬에서 사용하려면 Python 3.8 이상에서 `python -m pip install -e .`로 설치합니다. NAS의 공유 폴더 경로와 접속 정보, 접근 제한이 있는 Hugging Face 자료의 토큰은 아래 예제의 자리표시자를 자신의 환경에 맞게 채워 전달합니다.
+
+목적과 구현 범위, 구성 분석은 [Explain.md](Explain.md)를 참고하세요.
+
+<!-- repository-guide:end -->
+
 ## Installation
 
 ```bash
@@ -87,4 +107,3 @@ model_download_path = prepare_model_from_nas(
 )
 AutoModel.from_pretrained(model_download_path)
 ```
-
